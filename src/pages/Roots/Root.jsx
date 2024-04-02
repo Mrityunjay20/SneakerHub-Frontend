@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { NavbarWithSearch } from "../components/Navbar";
+import { NavbarWithSearch } from "../../components/Navbar";
 
 export default function RootLayout(){
     return(

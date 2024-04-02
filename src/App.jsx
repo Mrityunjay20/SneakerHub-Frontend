@@ -1,23 +1,33 @@
 import "./App.css";
 import { Button } from "@material-tailwind/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RootLayout from "./pages/Root";
+import RootLayout from "./pages/Roots/Root";
 import HomePage from "./pages/Home";
 import ShopPage from "./pages/Shop";
 import ProductDetailPage from "./pages/ProductDetail";
-import Error404Page from "./pages/Error404";
+import Error404Page from "./pages/Roots/Error404";
 import ProductsPage from "./pages/Products";
+import AuthPage from "./pages/Authentication";
+import AuthLayout from "./pages/Roots/AuthRoot";
 
 function App() {
   const router = createBrowserRouter([
-    { path: "/",
-      element: <RootLayout/>,
+    {
+      path: "/",
+      element: <RootLayout />,
+      errorElement: <Error404Page />,
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: "/shop", element: <ShopPage /> },
+        { path: "/products", element: <ProductsPage /> },
+        { path: "/products/:productId", element: <ProductDetailPage /> },
+      ],
+    },
+    { path: "/login",
+      element: <AuthLayout/>,
       errorElement:<Error404Page/>,
       children:[
-        {index:true, element:<HomePage/>},
-        {path:'/shop', element:<ShopPage/>},
-        {path:'/products', element:<ProductsPage/>},
-        {path:'/products/:productId', element:<ProductDetailPage/>}
+        {index:true, element:<AuthPage/>},
       ]
   },
   ]);
