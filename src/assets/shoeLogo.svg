@@ -7,13 +7,13 @@
           xmlns="http://www.w3.org/2000/svg"
           fill="#000000"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g
             id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             stroke="#fff0f0"
-            stroke-width="112.64000000000001"
+            strokeWidth="112.64000000000001"
           >
             <path
               d="M134.12352 549.12L42.24 650.24v103.68l32 58.88 158.72-87.04"
