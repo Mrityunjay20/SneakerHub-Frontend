@@ -7,6 +7,7 @@ import {
   IconButton,
   Input,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
  
 export function NavbarWithSearch() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -39,9 +40,9 @@ export function NavbarWithSearch() {
           />
         </svg>
  
-        <a href="/" className="flex items-center">
+        <Link to="/" className="flex items-center">
           Home
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -85,9 +86,9 @@ export function NavbarWithSearch() {
             fill="#90A4AE"
           />
         </svg>
-        <a href="/shop" className="flex items-center">
+        <Link to="/shop" className="flex items-center">
           Shop
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -109,9 +110,9 @@ export function NavbarWithSearch() {
             fill="#90A4AE"
           />
         </svg>
-        <a href="/products" className="flex items-center">
+        <Link to="/products" className="flex items-center">
           Products
-        </a>
+        </Link>
       </Typography>
     </ul>
   );
@@ -119,13 +120,14 @@ export function NavbarWithSearch() {
   return (
     <Navbar className="mx-auto mt-12 max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4">
       <div className="container mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
+        <Link to={'/'}>
         <Typography
           as="a"
-          href="#"
+          href="/"
           className="mr-4 cursor-pointer py-1.5 font-medium"
         >
-          Material Tailwind
-        </Typography>
+          SneakHub
+        </Typography> </Link>
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden items-center gap-x-2 lg:flex">
           <div className="relative flex w-full gap-2 md:w-max">
