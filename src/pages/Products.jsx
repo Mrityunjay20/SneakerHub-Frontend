@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import TextingTextContent from "../components/TextingText"
+import LinkTextContent from "../components/Linktext"
 
 const PRODUCTS=[
     {id:1, title:"Product 1"},
@@ -12,7 +12,7 @@ export default function ProductsPage(){
     <ul>
        {PRODUCTS.map((prod)=>(
         <li key={prod.id}>
-            <Link to={`/products/${prod.id}`}><TextingTextContent content={prod.title} /></Link>
+            <Link to={`/products/${prod.id}`}><LinkTextContent content={prod.title} /></Link>
             
         </li>
        ))}
