@@ -136,7 +136,7 @@ export default function LoginCard({ signupstatus, singupfunction }) {
                     setErrorState('');
                   }}
                 >
-                  {signupstatus ? "Signin" : "Signup"} instead
+                  {signupstatus ? "Signin" : "Signup"} instead.
                 </Button>
               </div>
             </div>
