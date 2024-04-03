@@ -8,7 +8,7 @@ export default function ShopPage(){
     return(
         <>
         <TextingTextContent content={"shop page"}/>
-        <CatagoryRow usergender={"male"}/>
+        <CatagoryRow usergender={"male"} typof={"catagory"} catagoryof={"konsi cat"}/>
         <FeaturedRow usergender={"male"}/>
         <NewArrivalRow usergender={"male"}/>
         <TrendingRow usergender={"male"} />

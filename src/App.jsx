@@ -9,6 +9,7 @@ import Error404Page from "./pages/Roots/Error404";
 import ProductsPage from "./pages/Products";
 import AuthPage from "./pages/Authentication";
 import AuthLayout from "./pages/Roots/AuthRoot";
+import NotFoundPage from "./pages/Roots/ProdNotFound404";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,7 +26,7 @@ function App() {
     },
     { path: "/login",
       element: <AuthLayout/>,
-      errorElement:<Error404Page/>,
+      errorElement:<NotFoundPage/>,
       children:[
         {index:true, element:<AuthPage/>},
       ]
