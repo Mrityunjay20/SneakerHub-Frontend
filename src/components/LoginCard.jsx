@@ -39,6 +39,24 @@ export default function LoginCard({ signupstatus, singupfunction }) {
     }
     
   }
+  function handleSigninSubmit() {
+    if (
+      signemailRef.current.value.trim() == "" ||
+      signpasswordRef.current.value.trim() == ""
+    ) {
+      setErrorState("fill all fields");
+    } else if(!(EmailValidator.validate(signemailRef.current.value.trim()))){
+      setErrorState("enter correct email")
+    }
+    else {
+      setErrorState("works");
+    }
+    
+  
+
+  }
+  const signemailRef = useRef();
+  const signpasswordRef = useRef();
 
   return (
     <>
@@ -108,12 +126,15 @@ export default function LoginCard({ signupstatus, singupfunction }) {
                   name="confpassword"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
-                <Link to="/">
-                <Button className="mt-2">Signup</Button></Link>
+                <h1 className="font-normal text-red-600">{errorState}</h1>
+                <Button onClick={handleSignupSubmit} className="mt-2">Signup</Button>
                 <Button
                   color="blue"
                   className="p-3 mt-2 ml-2"
-                  onClick={() => singupfunction()}
+                  onClick={() => {
+                    singupfunction();
+                    setErrorState('');
+                  }}
                 >
                   {signupstatus ? "Signin" : "Signup"} instead
                 </Button>
@@ -131,6 +152,7 @@ export default function LoginCard({ signupstatus, singupfunction }) {
               <input
                 type="email"
                 id="email"
+                ref={signemailRef}
                 name="email"
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
@@ -142,15 +164,20 @@ export default function LoginCard({ signupstatus, singupfunction }) {
               </label>
               <input
                 type="Password"
+                ref={signpasswordRef}
                 id="password"
                 name="password"
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
-              <Button className="mt-2">Signin</Button>
+              <h1 className="text-red-600 font-semibold">{errorState}</h1>
+              <Button onClick={handleSigninSubmit} className="mt-2">Signin</Button>
               <Button
                 color="blue"
                 className="mt-2 ml-2"
-                onClick={() => singupfunction()}
+                onClick={() => {
+                  singupfunction();
+                  setErrorState('');
+                }}
               >
                 {signupstatus ? "Signin" : "Signup"} instead
               </Button>

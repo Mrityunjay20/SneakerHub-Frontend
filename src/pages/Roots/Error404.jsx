@@ -12,7 +12,7 @@ export default function Error404Page() {
 
       <div className="text-center mt-8">
         <p className="text-6xl text-white font-bold">Page Not Found</p>
-        <p className="text-lg font-bold text-gray-800 mb-4">
+        <p className="text-lg font-semibold text-gray-400 mb-4">
           Oops! Looks like you've wandered off the beaten path.
         </p>
       </div>
