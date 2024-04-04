@@ -4,24 +4,30 @@ import { useState } from "react";
 import { Link, redirect } from "react-router-dom";
 import RedShoe from "../assets/redshoe.png";
 import * as EmailValidator from 'email-validator';
+import { NavbarWithSearch } from "./Navbar";
+import { MiniNavBar } from "./MiniNav";
 
 
-export default function LoginCard({ signupstatus, singupfunction }) {
+export default function LoginCard({ signupstatus, togglefunction, singupFunction, signinFunction }) {
   const [errorState, setErrorState] = useState("");
 
-  const userNameRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confpassRef = useRef();
+
   const sendobject = {
-    username: "",
+    firstName: "",
+    lastName:"",
     email: "",
     password: "",
   };
 
   function handleSignupSubmit() {
     if (
-      userNameRef.current.value.trim() == "" ||
+      firstNameRef.current.value.trim() == "" ||
+      lastNameRef.current.value.trim() == "" ||
       emailRef.current.value.trim() == "" ||
       passwordRef.current.value.trim() == "" ||
       confpassRef.current.value.trim() == ""
@@ -35,10 +41,14 @@ export default function LoginCard({ signupstatus, singupfunction }) {
     }else if(passwordRef.current.value.trim().length < 5){
       setErrorState("Password should be 5 characters long")
     } else {
-      setErrorState("works");
+      sendobject.firstName = firstNameRef.current.value.trim();
+      sendobject.lastName = lastNameRef.current.value.trim();
+      sendobject.email = emailRef.current.value.trim();
+      sendobject.password = passwordRef.current.value.trim();
+      singupFunction(sendobject);
     }
-    
   }
+  
   function handleSigninSubmit() {
     if (
       signemailRef.current.value.trim() == "" ||
@@ -49,7 +59,9 @@ export default function LoginCard({ signupstatus, singupfunction }) {
       setErrorState("enter correct email")
     }
     else {
-      setErrorState("works");
+      sendobject.email = signemailRef.current.value.trim();
+      sendobject.password = signpasswordRef.current.value.trim();
+      signinFunction(sendobject);
     }
     
   
@@ -60,7 +72,7 @@ export default function LoginCard({ signupstatus, singupfunction }) {
 
   return (
     <>
-      
+      <MiniNavBar />
       <div className="flex w-4/6 h-4/6 mt-24 mx-auto rounded-md">
         <div className="w-1/2 h-full bg-green-500 rounded-s-lg">
           <img
@@ -78,11 +90,24 @@ export default function LoginCard({ signupstatus, singupfunction }) {
                   htmlFor="user_name"
                   className="leading-7 text-sm text-gray-600"
                 >
-                  User Name
+                  First Name
                 </label>
                 <input
                   type="text"
-                  ref={userNameRef}
+                  ref={firstNameRef}
+                  id="user_name"
+                  name="user_name"
+                  className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+                <label
+                  htmlFor="user_name"
+                  className="leading-7 text-sm text-gray-600"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  ref={lastNameRef}
                   id="user_name"
                   name="user_name"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
@@ -132,11 +157,11 @@ export default function LoginCard({ signupstatus, singupfunction }) {
                   color="blue"
                   className="p-3 mt-2 ml-2"
                   onClick={() => {
-                    singupfunction();
+                    togglefunction();
                     setErrorState('');
                   }}
                 >
-                  {signupstatus ? "Signin" : "Signup"} instead.
+                  {signupstatus ? "Signin" : "Signup"} instead
                 </Button>
               </div>
             </div>
@@ -175,7 +200,7 @@ export default function LoginCard({ signupstatus, singupfunction }) {
                 color="blue"
                 className="mt-2 ml-2"
                 onClick={() => {
-                  singupfunction();
+                  togglefunction();
                   setErrorState('');
                 }}
               >

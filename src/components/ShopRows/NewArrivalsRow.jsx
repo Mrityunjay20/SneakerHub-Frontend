@@ -15,7 +15,7 @@ export default function NewArrivalRow({usergender}){
     <div className="flex overflow-x-auto">
         {PRODUCTS.map((prod) => (
           <ProductCard
-            key={prod.ID}
+            key={Math.random()}
             productid={prod.ID}
             productName={prod.name}
             productPrice={prod.price}

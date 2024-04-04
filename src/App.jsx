@@ -10,6 +10,10 @@ import ProductsPage from "./pages/Products";
 import AuthPage from "./pages/Authentication";
 import AuthLayout from "./pages/Roots/AuthRoot";
 import NotFoundPage from "./pages/Roots/ProdNotFound404";
+import NoPermissionPage from "./pages/Roots/PermissionDenied403"
+import Cart from "./pages/Cart"
+
+
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +26,7 @@ function App() {
         { path: "/shop", element: <ShopPage /> },
         { path: "/products", element: <ProductsPage /> },
         { path: "/products/:productId", element: <ProductDetailPage /> },
+        { path: "/cart", element: <Cart/> },
       ],
     },
     { path: "/login",

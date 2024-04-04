@@ -9,9 +9,19 @@ import {
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import ShoeLogo from "../assets/shoeLogo.svg";
+import { getAuthToken } from "../Services/authService";
 
 export function NavbarWithSearch() {
   const [openNav, setOpenNav] = React.useState(false);
+
+  const loggedin = getAuthToken();
+
+  function reloadwindow(){
+    localStorage.removeItem('token');
+    window.location.reload();
+
+  }
+
 
   React.useEffect(() => {
     window.addEventListener(
@@ -21,7 +31,7 @@ export function NavbarWithSearch() {
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-4 flex text-black flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="mt-2 mb-4 flex   text-black flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         as="li"
         variant="small"
@@ -45,30 +55,7 @@ export function NavbarWithSearch() {
           Home
         </Link>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="flex items-center gap-x-2 p-1 font-medium"
-      >
-        <svg
-          width="16"
-          height="17"
-          viewBox="0 0 16 17"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M16 8.5C16 10.6217 15.1571 12.6566 13.6569 14.1569C12.1566 15.6571 10.1217 16.5 8 16.5C5.87827 16.5 3.84344 15.6571 2.34315 14.1569C0.842855 12.6566 0 10.6217 0 8.5C0 6.37827 0.842855 4.34344 2.34315 2.84315C3.84344 1.34285 5.87827 0.5 8 0.5C10.1217 0.5 12.1566 1.34285 13.6569 2.84315C15.1571 4.34344 16 6.37827 16 8.5ZM10 5.5C10 6.03043 9.78929 6.53914 9.41421 6.91421C9.03914 7.28929 8.53043 7.5 8 7.5C7.46957 7.5 6.96086 7.28929 6.58579 6.91421C6.21071 6.53914 6 6.03043 6 5.5C6 4.96957 6.21071 4.46086 6.58579 4.08579C6.96086 3.71071 7.46957 3.5 8 3.5C8.53043 3.5 9.03914 3.71071 9.41421 4.08579C9.78929 4.46086 10 4.96957 10 5.5ZM8 9.5C7.0426 9.49981 6.10528 9.77449 5.29942 10.2914C4.49356 10.8083 3.85304 11.5457 3.454 12.416C4.01668 13.0706 4.71427 13.5958 5.49894 13.9555C6.28362 14.3152 7.13681 14.5009 8 14.5C8.86319 14.5009 9.71638 14.3152 10.5011 13.9555C11.2857 13.5958 11.9833 13.0706 12.546 12.416C12.147 11.5457 11.5064 10.8083 10.7006 10.2914C9.89472 9.77449 8.9574 9.49981 8 9.5Z"
-            fill="#000000"
-          />
-        </svg>
-        <Link to="/login" className="flex text-black items-center">
-          Account
-        </Link>
-      </Typography>
+      
       <Typography
         as="li"
         variant="small"
@@ -115,11 +102,87 @@ export function NavbarWithSearch() {
           Products
         </Link>
       </Typography>
+      <Typography
+  as="li"
+  variant="small"
+  color="blue-gray"
+  className="flex items-center gap-x-2 p-1 font-medium"
+>
+<svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="text-black"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M1 4C1 3.44772 1.44772 3 2 3H5.33542L7.12866 11.0289C7.29802 11.6439 7.81477 12 8.45332 12H19C19.5523 12 20 12.4477 20 13C20 13.5523 19.5523 14 19 14H9.21875L8.81512 16H19C20.6569 16 22 17.3431 22 19C22 20.6569 20.6569 22 19 22C17.3431 22 16 20.6569 16 19C16 18.4477 16.4477 18 17 18C17.5523 18 18 17.5523 18 17C18 16.4477 18.4477 16 19 16C20.1046 16 21 17.3431 21 19C21 20.6569 20.1046 22 19 22H5C3.89543 22 3 20.6569 3 19C3 17.3431 3.89543 16 5 16H6.18488L6.58851 14H2C1.44772 14 1 13.5523 1 13C1 12.4477 1.44772 12 2 12H5.72461L4.19824 5.79395C4.08032 5.43408 4.24232 5.05252 4.57784 4.87884C4.91337 4.70515 5.31676 4.7798 5.57967 5.04139L6.55175 6.00004H17.7637L16.5788 3.00004H3C2.44772 3.00004 2 3.44776 2 4.00004V4ZM7.5 19C7.5 19.5523 7.05228 20 6.5 20C5.94772 20 5.5 19.5523 5.5 19C5.5 18.4477 5.94772 18 6.5 18C7.05228 18 7.5 18.4477 7.5 19ZM17 18C16.4477 18 16 18.4477 16 19C16 19.5523 16.4477 20 17 20C17.5523 20 18 19.5523 18 19C18 18.4477 17.5523 18 17 18Z"
+      fill="#000000"
+    />
+  </svg>
+  <Link to="/cart" className="flex text-black items-center">
+    Cart
+  </Link>
+</Typography>
+{loggedin != null ?
+  <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="flex items-center gap-x-2 p-1 font-medium"
+      >
+        <svg
+          width="16"
+          height="17"
+          viewBox="0 0 16 17"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M16 8.5C16 10.6217 15.1571 12.6566 13.6569 14.1569C12.1566 15.6571 10.1217 16.5 8 16.5C5.87827 16.5 3.84344 15.6571 2.34315 14.1569C0.842855 12.6566 0 10.6217 0 8.5C0 6.37827 0.842855 4.34344 2.34315 2.84315C3.84344 1.34285 5.87827 0.5 8 0.5C10.1217 0.5 12.1566 1.34285 13.6569 2.84315C15.1571 4.34344 16 6.37827 16 8.5ZM10 5.5C10 6.03043 9.78929 6.53914 9.41421 6.91421C9.03914 7.28929 8.53043 7.5 8 7.5C7.46957 7.5 6.96086 7.28929 6.58579 6.91421C6.21071 6.53914 6 6.03043 6 5.5C6 4.96957 6.21071 4.46086 6.58579 4.08579C6.96086 3.71071 7.46957 3.5 8 3.5C8.53043 3.5 9.03914 3.71071 9.41421 4.08579C9.78929 4.46086 10 4.96957 10 5.5ZM8 9.5C7.0426 9.49981 6.10528 9.77449 5.29942 10.2914C4.49356 10.8083 3.85304 11.5457 3.454 12.416C4.01668 13.0706 4.71427 13.5958 5.49894 13.9555C6.28362 14.3152 7.13681 14.5009 8 14.5C8.86319 14.5009 9.71638 14.3152 10.5011 13.9555C11.2857 13.5958 11.9833 13.0706 12.546 12.416C12.147 11.5457 11.5064 10.8083 10.7006 10.2914C9.89472 9.77449 8.9574 9.49981 8 9.5Z"
+            fill="#000000"
+          />
+        </svg>
+        <button onClick={reloadwindow} className="flex text-black items-center">
+         Logout
+        </button>
+      </Typography> :
+      <Typography
+      as="li"
+      variant="small"
+      color="blue-gray"
+      className="flex items-center gap-x-2 p-1 font-medium"
+    >
+      <svg
+        width="16"
+        height="17"
+        viewBox="0 0 16 17"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M16 8.5C16 10.6217 15.1571 12.6566 13.6569 14.1569C12.1566 15.6571 10.1217 16.5 8 16.5C5.87827 16.5 3.84344 15.6571 2.34315 14.1569C0.842855 12.6566 0 10.6217 0 8.5C0 6.37827 0.842855 4.34344 2.34315 2.84315C3.84344 1.34285 5.87827 0.5 8 0.5C10.1217 0.5 12.1566 1.34285 13.6569 2.84315C15.1571 4.34344 16 6.37827 16 8.5ZM10 5.5C10 6.03043 9.78929 6.53914 9.41421 6.91421C9.03914 7.28929 8.53043 7.5 8 7.5C7.46957 7.5 6.96086 7.28929 6.58579 6.91421C6.21071 6.53914 6 6.03043 6 5.5C6 4.96957 6.21071 4.46086 6.58579 4.08579C6.96086 3.71071 7.46957 3.5 8 3.5C8.53043 3.5 9.03914 3.71071 9.41421 4.08579C9.78929 4.46086 10 4.96957 10 5.5ZM8 9.5C7.0426 9.49981 6.10528 9.77449 5.29942 10.2914C4.49356 10.8083 3.85304 11.5457 3.454 12.416C4.01668 13.0706 4.71427 13.5958 5.49894 13.9555C6.28362 14.3152 7.13681 14.5009 8 14.5C8.86319 14.5009 9.71638 14.3152 10.5011 13.9555C11.2857 13.5958 11.9833 13.0706 12.546 12.416C12.147 11.5457 11.5064 10.8083 10.7006 10.2914C9.89472 9.77449 8.9574 9.49981 8 9.5Z"
+          fill="#000000"
+        />
+      </svg>
+      <Link to={'/login'} className="flex text-black items-center">
+       Login
+      </Link>
+    </Typography>
+}
+
     </ul>
   );
 
   return (
-    <Navbar className="mx-auto md:mt-3 lg:mt-12 max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4">
+    <Navbar className="mx-auto md:mt-3 lg:mt-12  max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4">
       <div className="container mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
         <Link to={"/"} className="flex items-center">
           <img src={ShoeLogo} className="logo react mr-3" alt="Shoe logo" />
