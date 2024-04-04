@@ -5,7 +5,7 @@ const PRODUCTS = [
   { Id: "2", name: "adidas", price: "5100", shortDecp: "rghrgbgkrtgbrtg" },
   { Id: "3", name: "puma", price: "2100", shortDecp: "rghrgbgkrtgbrtg" },
   { Id: "4", name: "reebok", price: "3200", shortDecp: "rghrgbgkrtgbrtg" },
-  { Id: "5", name: "new balance", price: "2300", shortDecp: "rghrgbgkrtgbrtg" },
+  { Id: "5", name: "new balance", price: "2300", shortDecp: "rghrgbgkrtgbrtg" }
 ];
 
 export default function CatagoryRow({ usergender }) {

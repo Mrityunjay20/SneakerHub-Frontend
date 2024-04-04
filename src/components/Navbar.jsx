@@ -115,11 +115,37 @@ export function NavbarWithSearch() {
           Products
         </Link>
       </Typography>
+      <Typography
+  as="li"
+  variant="small"
+  color="blue-gray"
+  className="flex items-center gap-x-2 p-1 font-medium"
+>
+<svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="text-black"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M1 4C1 3.44772 1.44772 3 2 3H5.33542L7.12866 11.0289C7.29802 11.6439 7.81477 12 8.45332 12H19C19.5523 12 20 12.4477 20 13C20 13.5523 19.5523 14 19 14H9.21875L8.81512 16H19C20.6569 16 22 17.3431 22 19C22 20.6569 20.6569 22 19 22C17.3431 22 16 20.6569 16 19C16 18.4477 16.4477 18 17 18C17.5523 18 18 17.5523 18 17C18 16.4477 18.4477 16 19 16C20.1046 16 21 17.3431 21 19C21 20.6569 20.1046 22 19 22H5C3.89543 22 3 20.6569 3 19C3 17.3431 3.89543 16 5 16H6.18488L6.58851 14H2C1.44772 14 1 13.5523 1 13C1 12.4477 1.44772 12 2 12H5.72461L4.19824 5.79395C4.08032 5.43408 4.24232 5.05252 4.57784 4.87884C4.91337 4.70515 5.31676 4.7798 5.57967 5.04139L6.55175 6.00004H17.7637L16.5788 3.00004H3C2.44772 3.00004 2 3.44776 2 4.00004V4ZM7.5 19C7.5 19.5523 7.05228 20 6.5 20C5.94772 20 5.5 19.5523 5.5 19C5.5 18.4477 5.94772 18 6.5 18C7.05228 18 7.5 18.4477 7.5 19ZM17 18C16.4477 18 16 18.4477 16 19C16 19.5523 16.4477 20 17 20C17.5523 20 18 19.5523 18 19C18 18.4477 17.5523 18 17 18Z"
+      fill="#000000"
+    />
+  </svg>
+  <Link to="/cart" className="flex text-black items-center">
+    Cart
+  </Link>
+</Typography>
+
     </ul>
   );
 
   return (
-    <Navbar className="mx-auto md:mt-3 lg:mt-12 max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4">
+    <Navbar className="mx-auto md:mt-3 lg:mt-12  max-w-screen-xl px-4 py-2 lg:px-8 lg:py-4">
       <div className="container mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
         <Link to={"/"} className="flex items-center">
           <img src={ShoeLogo} className="logo react mr-3" alt="Shoe logo" />
