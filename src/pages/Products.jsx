@@ -54,7 +54,7 @@ export default function ProductsPage() {
             <div className="flex">
                 <SideBar />
                 <div className="h-full w-full">
-                    <div className="grid grid-cols-3 h-full">
+                    <div className="grid grid-cols-3 sd:grid-cols-2 h-full">
                         {currentProducts.map((prod) => (
                             <ProductCard
                                 key={prod.id}
