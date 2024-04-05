@@ -1,13 +1,21 @@
-import { redirect } from "react-router-dom";
+import image from "../assets/nopermission.png";
 
 const LoginPageLink = () => (
-  <a href="/login" className="text-blue-500 hover:underline">Login page</a>
+  <a href="/login" className="text-blue-500 hover:underline">
+    Login
+  </a>
 );
 
 const LoginPagePrompt = () => (
-  <div className="flex flex-col items-center justify-center h-screen">
-    <h1 className="text-3xl font-semibold mb-4">Please log in to access your cart</h1>
-    <p className="text-lg text-gray-600 mb-6">You need to be logged in to view your cart. If you don't have an account, you can create one on the<br/> <LoginPageLink />.</p>
+  <div className="w-full bg-black h-screen flex flex-col items-center justify-center">
+    <img className="mt-4  w-[500px] h-auto" src={image} alt="agea" />
+    <div className="text-center">
+      <p className="text-5xl text-white font-bold">No Permission</p>
+      <p className="text-lg text-gray-800">
+        Oops! It seems you don't have permission to access this page, try logging in <br/>
+        <LoginPageLink />
+      </p>
+    </div>
   </div>
 );
 

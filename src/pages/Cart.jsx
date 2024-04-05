@@ -1,36 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import LoginPagePrompt from '../components/LoginRedirect';
-
+import api from "../api";
 const Cart = () => {
   const loggedin = localStorage.getItem('token');
 
 
-  const [cartItems, setCartItems] = useState([
-    { id: 1, productName: 'Dingo Dog Bones', description: 'The best dog bones of all time...', price: 12.99, quantity: 2, image: 'https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80' },
-    { id: 2, productName: 'Nutro™ Adult Lamb and Rice Dog Food', description: 'Who doesn\'t like lamb and rice?...', price: 45.99, quantity: 1, image: 'https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80' }
-  ]);
+  const [cartItems, setCartItems] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await api.get("/cart");
+      setCartItems(response.data);
+    } catch (error) {
+      console.error("Error fetching cart data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const [taxRate] = useState(0.05);
-  const [shippingRate] = useState(15.00);
+  const [shippingRate] = useState(15.0);
 
-  const updateQuantity = (id, quantity) => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, quantity: quantity } : item
-      )
-    );
+  const updateQuantity = async (id, quantity) => {
+    if (!quantity || quantity < 1) {
+      return;
+    }
+    try {
+      await api.put(`/cart/update/${id}/${quantity}`);
+      // After successful update, fetch data again to get updated cart items
+      fetchData();
+    } catch (error) {
+      console.error("Error updating quantity:", error);
+    }
   };
 
-  const removeItem = (id) => {
-    setCartItems(prevItems =>
-      prevItems.filter(item => item.id !== id)
-    );
+  const removeItem = async (id) => {
+    try {
+      await api.delete(`/cart/remove/${id}`);
+      // After successful removal, fetch data again to get updated cart items
+      fetchData();
+    } catch (error) {
+      console.error("Error removing item from cart:", error);
+    }
   };
-
   const recalculateCart = () => {
     let subtotal = 0;
-    cartItems.forEach(item => {
+    cartItems.forEach((item) => {
       subtotal += item.price * item.quantity;
     });
 
@@ -42,43 +60,77 @@ const Cart = () => {
       subtotal: subtotal.toFixed(2),
       tax: tax.toFixed(2),
       shipping: shipping.toFixed(2),
-      total: total.toFixed(2)
+      total: total.toFixed(2),
     };
   };
 
   const cartTotal = recalculateCart();
 
   return (<>
-  {loggedin != null ?<div className="m-10 p-10 text-white">
+  {loggedin != null ?<div className="md:p-5 md:mx-20 sm:mx-0 sm:p-0 text-white">
       <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
 
-      <div className="border-b border-gray-200 mb-4">
-        <div className="flex items-center py-2">
-          <div className="w-1/6 pl-2">Image</div>
-          <div className="w-3/6 pl-2">Product</div>
-          <div className="w-1/6 pl-2">Price</div>
-          <div className="w-1/6 pl-2">Quantity</div>
-          <div className="w-1/6 pl-2">Remove</div>
-          <div className="w-1/6 pl-2 pr-2 text-right">Total</div>
-        </div>
+      <div className="flex items-center py-2">
+        <div className="w-1/6 pl-2">Image</div>
+        <div className="w-3/6 pl-2">Product</div>
+        <div className="w-1/6 pl-2">Price</div>
+        <div className="w-1/12 pl-2 text-center">Quantity</div>{" "}
+        {/* Adjusted width */}
+        <div className="w-1/6 pl-2 text-center">Remove</div>
+        <div className="w-1/6 pl-2 pr-4 text-right">Total</div>
       </div>
 
-      {cartItems.map(item => (
-        <div key={item.id} className="flex items-center p-1 border-b border-gray-200">
+      {cartItems.map((item) => (
+        <div
+          key={item.cart_id}
+          className="flex items-center p-1 border-b border-gray-200"
+        >
           <div className="w-1/6">
-            <img src={item.image} alt="Product" className="w-16 h-auto" />
+            <img src={item.imageURL} alt="Product" className="w-16 h-auto" />
           </div>
           <div className="w-3/6 pl-2">
-            <div className="font-bold">{item.productName}</div>
-            <p className="text-sm text-gray-600">{item.description}</p>
+            <div className="font-bold">{item.name}</div>
+            <p className="text-sm text-gray-600">{item.brand}</p>
           </div>
           <div className="w-1/6 pl-2">${item.price}</div>
-          
+          {/* Quantity input with buttons */}
+          <div className="relative w-1/12 rounded  pl-2">
+            <div className=" flex h- items-center justify-center border-white border rounded-lg shadow-md">
+              <button
+                className="w-20  h-full text-center text-2xl text-white font-semibold cursor-pointer select-none"
+                onClick={() => updateQuantity(item.pid, item.quantity - 1)}
+              >
+                -
+              </button>
+              <input
+                value={item.quantity}
+                min="1"
+                onChange={(e) =>
+                  updateQuantity(item.pid, parseInt(e.target.value))
+                }
+                placeholder="1"
+                className="w-8 text-center text-white text-l bg-black  border-l border-r  border-white-500"
+              />
+              <button
+                className="w-20 h-full text-center text-xl text-white cursor-pointer select-none"
+                onClick={() => updateQuantity(item.pid, item.quantity + 1)}
+              >
+                +
+              </button>
+            </div>
+          </div>
 
           <div className="w-1/6 flex justify-center items-center">
-            <button onClick={() => removeItem(item.id)} className="text-red-600 hover:text-red-800 focus:outline-none"><TrashIcon className='w-5  h-5'/></button>
+            <button
+              onClick={() => removeItem(item.pid)}
+              className="text-red-600 hover:text-red-800 focus:outline-none"
+            >
+              <TrashIcon className="w-5  h-5" />
+            </button>
           </div>
-          <div className="w-1/6 pr-2 text-right">${(item.price * item.quantity).toFixed(2)}</div>
+          <div className="w-1/6 pr-2 text-right">
+            ${(item.price * item.quantity).toFixed(2)}
+          </div>
         </div>
       ))}
 
@@ -102,7 +154,9 @@ const Cart = () => {
       </div>
 
       <div className="flex justify-end mt-6">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Checkout</button>
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Checkout
+        </button>
       </div>
     </div> :
     <LoginPagePrompt />

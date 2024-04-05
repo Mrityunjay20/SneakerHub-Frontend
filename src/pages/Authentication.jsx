@@ -97,7 +97,7 @@ export default function AuthPage() {
     const [showComponent, setShowComponent] = useState(false);
     
 
-    const apiUrl = 'http://localhost:8080/auth'; // Base API URL
+    const apiUrl = 'http://localhost:8181/auth'; // Base API URL
 
     const sendData = async (endpoint, objectBody) => {
         try {
@@ -120,10 +120,9 @@ export default function AuthPage() {
     const trySignup = async (objectBody) => {
         const checker = JSON.stringify(objectBody);
         const signupOutput = await sendData('signup', checker);
-        console.log(signupOutput);
         if (signupOutput.status === 201) {
             setTestState(true);
-            console.log(signupOutput.data);
+            localStorage.setItem('token', signupOutput.data.jwt);
             showAlert();
             window.location.href = "/shop";
            

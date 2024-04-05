@@ -6,7 +6,7 @@ export default function SideBar() {
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 
   return (
-    <Card className="h-[120vh] w-full max-w-[20rem] mt-3 p-4 shadow-xl m shadow-blue-gray-900/5">
+    <Card className=" w-full max-w-[20rem] mt-3 p-4 shadow-xl m shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="blue-gray">
           Filter

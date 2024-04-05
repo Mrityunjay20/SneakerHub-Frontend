@@ -6,7 +6,6 @@ import TextingTextContent from "../components/TextingText";
 import { getAuthToken } from "../Services/authService";
 
 export default function ShopPage(){
-    console.log(getAuthToken());
     return(
         <>
         <TextingTextContent content={"shop page"}/>
