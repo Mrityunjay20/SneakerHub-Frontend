@@ -1,22 +1,29 @@
 import { useState } from "react";
 import api from "../api";
 
-export default function ProductCard({productid, productName, productImage, productPrice, shortDescription}) {
+export default function ProductCard({
+  productid,
+  productName,
+  productImage,
+  productPrice,
+  shortDescription,
+}) {
   const [loading, setLoading] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
-  const [buttonClass, setButtonClass] = useState(''); // State to manage button class
+  const [buttonClass, setButtonClass] = useState(""); // State to manage button class
 
   const addToCart = () => {
     setLoading(true);
-    api.post(`/cart/add/${productid}/1`)
-      .then(response => {
+    api
+      .post(`/cart/add/${productid}/1`)
+      .then((response) => {
         console.log("Product added to cart:", response.data);
-       setButtonClass('bg-green-500'); // Set button color to green
+        setButtonClass("bg-green-500"); // Set button color to green
         setTimeout(() => {
-          setButtonClass(''); // Restore button color after a delay
+          setButtonClass(""); // Restore button color after a delay
         }, 200); // Adjust the delay as needed
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error adding product to cart:", error);
       })
       .finally(() => {
@@ -25,12 +32,12 @@ export default function ProductCard({productid, productName, productImage, produ
   };
 
   return (
-    <div className="relative m-3 flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
-      <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-72">
+    <div className="relative m-3 flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl h-auto w-3/2">
+      <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-auto">
         <img
           src={productImage}
           alt="card-image"
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-auto sm:w-auto sm:h-auto"
         />
       </div>
       <div className="p-6">
