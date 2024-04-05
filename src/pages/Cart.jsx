@@ -29,17 +29,17 @@ const Cart = () => {
       // After successful update, fetch data again to get updated cart items
       fetchData();
     } catch (error) {
-      console.error('Error updating quantity:', error);
+      console.error("Error updating quantity:", error);
     }
   };
-  
+
   const removeItem = async (id) => {
     try {
       await api.delete(`/cart/remove/${id}`);
       // After successful removal, fetch data again to get updated cart items
       fetchData();
     } catch (error) {
-      console.error('Error removing item from cart:', error);
+      console.error("Error removing item from cart:", error);
     }
   };
   const recalculateCart = () => {
@@ -63,17 +63,18 @@ const Cart = () => {
   const cartTotal = recalculateCart();
 
   return (
-    <div className=" p-5 mx-20 text-white">
+    <div className="md:p-5 md:mx-20 sm:mx-0 sm:p-0 text-white">
       <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
 
       <div className="flex items-center py-2">
-    <div className="w-1/6 pl-2">Image</div>
-    <div className="w-3/6 pl-2">Product</div>
-    <div className="w-1/6 pl-2">Price</div>
-    <div className="w-1/12 pl-2 text-center">Quantity</div> {/* Adjusted width */}
-    <div className="w-1/6 pl-2 text-center">Remove</div>
-    <div className="w-1/6 pl-2 pr-4 text-right">Total</div>
-  </div>
+        <div className="w-1/6 pl-2">Image</div>
+        <div className="w-3/6 pl-2">Product</div>
+        <div className="w-1/6 pl-2">Price</div>
+        <div className="w-1/12 pl-2 text-center">Quantity</div>{" "}
+        {/* Adjusted width */}
+        <div className="w-1/6 pl-2 text-center">Remove</div>
+        <div className="w-1/6 pl-2 pr-4 text-right">Total</div>
+      </div>
 
       {cartItems.map((item) => (
         <div
@@ -90,27 +91,29 @@ const Cart = () => {
           <div className="w-1/6 pl-2">${item.price}</div>
           {/* Quantity input with buttons */}
           <div className="relative w-1/12 rounded  pl-2">
-            <button
-              onClick={() => updateQuantity(item.pid, item.quantity - 1)}
-              className="absolute ml-2 border-r border-white left-0 h-full rounded-l px-2 focus:outline-none"
-            >
-              -
-            </button>
-            <input
-              value={item.quantity}
-              min="1"
-              onChange={(e) =>
-                updateQuantity(item.pid, parseInt(e.target.value))
-              }
-              className="w-full h-full border bg-black border-gray-300 rounded-none px-8 py-1 focus:outline-none focus:border-blue-500 text-center"
-              placeholder="1"
-            />
-            <button
-              onClick={() => updateQuantity(item.pid, item.quantity + 1)}
-              className="absolute border-l border-white right-0 h-full  rounded-r px-2 focus:outline-none"
-            >
-              +
-            </button>
+            <div className=" flex h- items-center justify-center border-white border rounded-lg shadow-md">
+              <button
+                className="w-20  h-full text-center text-2xl text-white font-semibold cursor-pointer select-none"
+                onClick={() => updateQuantity(item.pid, item.quantity - 1)}
+              >
+                -
+              </button>
+              <input
+                value={item.quantity}
+                min="1"
+                onChange={(e) =>
+                  updateQuantity(item.pid, parseInt(e.target.value))
+                }
+                placeholder="1"
+                className="w-8 text-center text-white text-l bg-black  border-l border-r  border-white-500"
+              />
+              <button
+                className="w-20 h-full text-center text-xl text-white cursor-pointer select-none"
+                onClick={() => updateQuantity(item.pid, item.quantity + 1)}
+              >
+                +
+              </button>
+            </div>
           </div>
 
           <div className="w-1/6 flex justify-center items-center">

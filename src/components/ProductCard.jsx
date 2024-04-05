@@ -38,7 +38,6 @@ export default function ProductCard({productid, productName, productImage, produ
           <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
             {productName}
           </p>
-          <p>{productid}</p>
           <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
             ₹{productPrice}
           </p>

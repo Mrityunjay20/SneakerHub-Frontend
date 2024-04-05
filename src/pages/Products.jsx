@@ -50,11 +50,12 @@ export default function ProductsPage() {
     }
 
     return (
-        <>
-            <div className="flex">
+        < >
+            <div className="flex ">
                 <SideBar />
-                <div className="h-full w-full">
-                    <div className="grid grid-cols-3 sd:grid-cols-2 h-full">
+                 <div className="flex flex-col w-full overflow-hidden">
+                <div className="h-full  overflow-auto">
+                    <div className="grid grid-cols-3 sd:grid-cols-2 ">
                         {currentProducts.map((prod) => (
                             <ProductCard
                                 key={prod.id}
@@ -66,6 +67,7 @@ export default function ProductsPage() {
                             />
                         ))}
                     </div>
+                </div>
                 </div>
             </div>
 
