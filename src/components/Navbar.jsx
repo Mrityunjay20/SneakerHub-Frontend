@@ -10,11 +10,14 @@ import {
 import { Link } from "react-router-dom";
 import ShoeLogo from "../assets/shoeLogo.svg";
 import { getAuthToken } from "../Services/authService";
+import { useRef } from "react";
 
 export function NavbarWithSearch() {
   const [openNav, setOpenNav] = React.useState(false);
 
   const loggedin = getAuthToken();
+
+
 
   function reloadwindow(){
     localStorage.removeItem('token');
@@ -23,12 +26,22 @@ export function NavbarWithSearch() {
   }
 
 
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+
+  const searchRef = useRef(null);
+
+  function searchFunction() {
+    console.log("search function called");
+    const value = JSON.stringify(searchRef.current.value);
+    console.log(value);
+  }
+
 
   const navList = (
     <ul className="mt-2 mb-4 flex   text-black flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -176,17 +189,18 @@ export function NavbarWithSearch() {
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden items-center gap-x-2 lg:flex">
           <div className="relative flex w-full gap-2 md:w-max">
-            <Input
-              type="search"
-              placeholder="Search"
-              containerProps={{
-                className: "min-w-[288px]",
-              }}
-              className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-blue-gray-300"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
+          <Input
+            type="text"
+            placeholder="Search"
+            ref={searchRef}
+            containerProps={{
+              className: "min-w-[288px]",
+            }}
+            className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-blue-gray-300"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+          />
             <div className="!absolute left-3 top-[13px]">
               <svg
                 width="13"
@@ -209,7 +223,7 @@ export function NavbarWithSearch() {
               </svg>
             </div>
           </div>
-          <Button size="md" className="rounded-md ">
+          <Button onClick={searchFunction} size="md" className="rounded-md ">
             Search
           </Button>
         </div>
@@ -256,17 +270,18 @@ export function NavbarWithSearch() {
           {navList}
           <div className="flex flex-col gap-x-2 sm:flex-row sm:items-center">
             <div className="relative w-full gap-2 md:w-max">
-              <Input
-                type="search"
-                placeholder="Search"
-                containerProps={{
-                  className: "min-w-[288px]",
-                }}
-                className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-blue-gray-300"
-                labelProps={{
-                  className: "before:content-none after:content-none",
-                }}
-              />
+            <Input
+            type="text"
+            placeholder="Search"
+            ref={searchRef}
+            containerProps={{
+              className: "min-w-[288px]",
+            }}
+            className=" !border-t-blue-gray-300 pl-9 placeholder:text-blue-gray-300 focus:!border-blue-gray-300"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+          />
               <div className="!absolute left-3 top-[13px]">
                 <svg
                   width="13"
@@ -289,7 +304,7 @@ export function NavbarWithSearch() {
                 </svg>
               </div>
             </div>
-            <Button size="md" className="mt-1 rounded-md sm:mt-0">
+            <Button onClick={searchFunction} size="md" className="mt-1 rounded-md sm:mt-0">
               Search
             </Button>
           </div>

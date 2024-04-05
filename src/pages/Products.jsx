@@ -8,16 +8,23 @@ export default function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(6); // Initial number of products per page
 
+  const [allState, setAllState] = useState();
+
+  
   useEffect(() => {
     api
       .get("/products")
       .then((response) => {
+        const fetchedProducts = response.data;
+        setAllState(response.data);
         setProducts(response.data);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
       });
   }, []);
+
+  
 
   // Update number of products per page based on screen size
   useEffect(() => {
@@ -69,10 +76,28 @@ export default function ProductsPage() {
   }
   const renderSideBar = window.innerWidth >= 768;
 
+  async function filterfunction(gender){
+    let fetchedProducts = [];
+    await api
+      .get("/products")
+      .then((response) => {
+        setAllState(response.data);
+        setProducts(response.data);
+        fetchedProducts = response.data
+        console.log(fetchedProducts);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+      const newprods = await fetchedProducts.filter(product => product.gender == gender)
+    setProducts(newprods);
+    console.log(products);
+  }
+
   return (
     <div className="flex flex-col">
       <div className="flex">
-        {renderSideBar && <SideBar />}
+        {renderSideBar && <SideBar filtervalue={filterfunction} />}
         <div className="flex flex-col w-full overflow-hidden">
           <div className="max-h-[100vh] flex flex-wrap justify-center overflow-auto">
             <div

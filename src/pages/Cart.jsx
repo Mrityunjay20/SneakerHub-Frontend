@@ -92,7 +92,7 @@ const Cart = () => {
             <div className="font-bold">{item.name}</div>
             <p className="text-sm text-gray-600">{item.brand}</p>
           </div>
-          <div className="w-1/6 pl-2">${item.price}</div>
+          <div className="w-1/6 pl-2">Rs {item.price}</div>
           {/* Quantity input with buttons */}
           <div className="relative w-1/12 rounded  pl-2">
             <div className=" flex h- items-center justify-center border-white border rounded-lg shadow-md">
@@ -129,7 +129,7 @@ const Cart = () => {
             </button>
           </div>
           <div className="w-1/6 pr-2 text-right">
-            ${(item.price * item.quantity).toFixed(2)}
+            Rs {(item.price * item.quantity).toFixed(2)}
           </div>
         </div>
       ))}
@@ -137,19 +137,19 @@ const Cart = () => {
       <div className="mt-4 ">
         <div className="flex justify-between">
           <div className="font-bold">Subtotal</div>
-          <div>${cartTotal.subtotal}</div>
+          <div>Rs {cartTotal.subtotal}</div>
         </div>
         <div className="flex justify-between">
           <div className="font-bold">Tax (5%)</div>
-          <div>${cartTotal.tax}</div>
+          <div>Rs {cartTotal.tax}</div>
         </div>
         <div className="flex justify-between">
           <div className="font-bold">Shipping</div>
-          <div>${cartTotal.shipping}</div>
+          <div>Rs {cartTotal.shipping}</div>
         </div>
         <div className="flex justify-between">
           <div className="font-bold">Grand Total</div>
-          <div>${cartTotal.total}</div>
+          <div>Rs {cartTotal.total}</div>
         </div>
       </div>
 

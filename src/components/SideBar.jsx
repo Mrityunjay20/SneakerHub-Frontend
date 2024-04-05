@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
-export default function SideBar() {
+export default function SideBar({filtervalue}) {
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 
   return (
@@ -33,7 +33,7 @@ export default function SideBar() {
           </Typography>
           <ListItem>
             <ListItemPrefix>
-              <input type="checkbox" />
+              <input name="gender" id="gender" onClick={()=>(filtervalue("MEN"))} type="radio" />
             </ListItemPrefix>
             <Typography variant="small" className="text-sm sm:text-xs">
               Men
@@ -41,7 +41,7 @@ export default function SideBar() {
           </ListItem>
           <ListItem>
             <ListItemPrefix>
-              <input type="checkbox" />
+              <input name="gender" id="gender" onClick={()=>(filtervalue("WOMEN"))} type="radio" />
             </ListItemPrefix>
             <Typography variant="small" className="text-sm sm:text-xs">
               Women
@@ -49,7 +49,7 @@ export default function SideBar() {
           </ListItem>
           <ListItem>
             <ListItemPrefix>
-              <input type="checkbox" />
+              <input name="gender" id="gender" onClick={()=>(filtervalue("KIDS"))} type="radio" />
             </ListItemPrefix>
             <Typography variant="small" className="text-sm sm:text-xs">
               Kids
@@ -57,35 +57,10 @@ export default function SideBar() {
           </ListItem>
         </div>
 
-        {/* Brand section */}
-        <div className="border-b border-gray-200 pb-2 mb-2">
-          <Typography
-            variant="small"
-            className="text-gray-500 pb-1 text-sm sm:text-xs"
-          >
-            Brand
-          </Typography>
-          <ListItem>
-            <ListItemPrefix>
-              <input type="checkbox" />
-            </ListItemPrefix>
-            <Typography variant="small" className="text-sm sm:text-xs">
-              GRACIT (1171)
-            </Typography>
-          </ListItem>
-          <ListItem>
-            <ListItemPrefix>
-              <input type="checkbox" />
-            </ListItemPrefix>
-            <Typography variant="small" className="text-sm sm:text-xs">
-              TAG 7 (1074)
-            </Typography>
-          </ListItem>
-          {/* Add more brands */}
-        </div>
+        
 
         {/* Price section */}
-        <div className="border-b border-gray-200 pb-2 mb-2">
+        {/* <div className="border-b border-gray-200 pb-2 mb-2">
           <Typography
             variant="small"
             className="text-gray-500 pb-1 text-sm sm:text-xs"
@@ -108,127 +83,9 @@ export default function SideBar() {
               Rs. 1853 to Rs. 3486 (75)
             </Typography>
           </ListItem>
-          {/* Add more price ranges */}
-        </div>
+          Add more price ranges
+        </div> */}
 
-        {showCategoryDropdown ? (
-          <div className="border-b border-gray-200 pb-2 mb-2 max-h-[150px] overflow-y-auto">
-            <Typography
-              variant="small"
-              className="text-gray-500 pb-1 text-sm sm:text-xs"
-            >
-              Category
-            </Typography>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <input type="checkbox" />
-              </ListItemPrefix>
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Leggings (6248)
-              </Typography>
-            </ListItem>
-            {/* Add more category items */}
-
-            <div
-              className="mt-2 text-gray-500 cursor-pointer flex items-center"
-              onClick={() => setShowCategoryDropdown(false)}
-            >
-              <ChevronUpIcon className="h-4 w-4 mr-1" />
-              <Typography variant="small" className="text-sm sm:text-xs">
-                Show Less
-              </Typography>
-            </div>
-          </div>
-        ) : (
-          <div
-            className="border-b border-gray-200 pb-2 mb-2 cursor-pointer"
-            onClick={() => setShowCategoryDropdown(true)}
-          >
-            <div className="flex justify-between items-center">
-              <Typography
-                variant="small"
-                className="text-gray-500 pb-1 text-sm sm:text-xs"
-              >
-                Category
-              </Typography>
-              <ChevronDownIcon className="h-5 w-5" />
-            </div>
-          </div>
-        )}
-
-        {/* Add more list items */}
       </List>
     </Card>
   );
