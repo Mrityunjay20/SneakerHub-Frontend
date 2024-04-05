@@ -22,7 +22,7 @@ export default function HomePage() {
               <Typography
                 variant="h1"
                 color="white"
-                className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+                className="mb-4 text-3xl min-w-max md:text-4xl lg:text-5xl"
               >
                 Discover Your Sole Style:
               </Typography>
@@ -87,7 +87,7 @@ export default function HomePage() {
               <Typography
                 variant="h1"
                 color="white"
-                className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+                className="mb-4 text-3xl min-w-max md:text-4xl lg:text-5xl"
               >
                 Stride in Style: Shop Now!
               </Typography>

@@ -12,10 +12,12 @@ import AuthLayout from "./pages/Roots/AuthRoot";
 import NotFoundPage from "./pages/Roots/ProdNotFound404";
 import NoPermissionPage from "./pages/Roots/PermissionDenied403"
 import Cart from "./pages/Cart"
+import OrderPlacedPage from "./pages/OrderPlaced";
 
 
 
 function App() {
+  localStorage.setItem('orderplaced',false)
   const router = createBrowserRouter([
     {
       path: "/",
@@ -25,8 +27,9 @@ function App() {
         { index: true, element: <HomePage /> },
         { path: "/shop", element: <ShopPage /> },
         { path: "/products", element: <ProductsPage /> },
-        { path: "/products/:productId", element: <ProductDetailPage /> },
+        // { path: "/products/:productId", element: <ProductDetailPage /> },
         { path: "/cart", element: <Cart/> },
+        { path: "/orderplaced", element: <OrderPlacedPage/>},
       ],
     },
     { path: "/login",

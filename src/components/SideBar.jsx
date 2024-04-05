@@ -12,7 +12,7 @@ export default function SideBar({filtervalue}) {
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 
   return (
-    <Card className="w-1/4 sm:w-1/3 md:w-1/4 lg:w-1/5 mt-3 p-4 shadow-xl m shadow-blue-gray-900/5 overflow-x-auto overflow-y-auto">
+    <Card className="w-1/4 sm:w-1/3 md:w-1/4 lg:w-1/5 mt-3 p-4 shadow-xl m shadow-blue-gray-900/5 overflow-x-auto h-1/2">
       <div className="mb-2 p-4">
         <Typography
           variant="h5"

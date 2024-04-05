@@ -21,6 +21,7 @@ export function NavbarWithSearch() {
 
   function reloadwindow(){
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
     window.location.reload();
 
   }

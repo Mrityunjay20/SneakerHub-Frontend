@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import LoginPagePrompt from '../components/LoginRedirect';
 import api from "../api";
+import { Link } from "react-router-dom";
 const Cart = () => {
   const loggedin = localStorage.getItem('token');
+  
 
   const userId = localStorage.getItem('id');
   const [cartItems, setCartItems] = useState([]);
@@ -14,6 +16,20 @@ const Cart = () => {
       setCartItems(response.data);
     } catch (error) {
       console.error("Error fetching cart data:", error);
+    }
+  };
+
+  const emptyCart = async () => {
+    try {
+      localStorage.setItem('orderplaced', true);
+      // Remove each item individually
+      await Promise.all(cartItems.map(async (item) => {
+        await removeItem(item.pid);
+      }));
+      // After successful removal, fetch data again to get updated cart items
+      fetchData();
+    } catch (error) {
+      console.error("Error emptying cart:", error);
     }
   };
 
@@ -154,9 +170,22 @@ const Cart = () => {
       </div>
 
       <div className="flex justify-end mt-6">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        {cartItems.length != 0 ?<Link to="/orderplaced">
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={emptyCart} // Call emptyCart function on button click
+          >
+            Checkout
+          </button>
+        </Link>:
+        <button
+          className="bg-gray-600  text-white font-bold py-2 px-4 user-select-none  rounded"
+          onClick={emptyCart} // Call emptyCart function on button click
+        >
           Checkout
         </button>
+        }
+
       </div>
     </div> :
     <LoginPagePrompt />

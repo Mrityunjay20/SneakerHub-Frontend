@@ -142,6 +142,7 @@ export default function AuthPage() {
             console.log(signinOutput.data);
             showAlert();
             localStorage.setItem('token',signinOutput.data.jwt)
+            localStorage.setItem('id',signinOutput.data.id)
             window.location.href = "/products";
            
         } else {
