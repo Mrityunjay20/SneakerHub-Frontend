@@ -8,6 +8,8 @@ export default function ProductCard({
   productPrice,
   shortDescription,
 }) {
+
+  const userId = localStorage.getItem('id');
   const [loading, setLoading] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [buttonClass, setButtonClass] = useState(""); // State to manage button class
@@ -15,7 +17,7 @@ export default function ProductCard({
   const addToCart = () => {
     setLoading(true);
     api
-      .post(`/cart/add/${productid}/1`)
+      .post(`/cart/add/${userId}/${productid}/1`)
       .then((response) => {
         console.log("Product added to cart:", response.data);
         setButtonClass("bg-green-500"); // Set button color to green

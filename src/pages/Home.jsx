@@ -110,8 +110,9 @@ export default function HomePage() {
           </div>
         </div>
       </Carousel>
-      <CatagoryRow usergender={"male"} />
       <FeaturedRow usergender={"male"} />
+      <CatagoryRow usergender={"male"} />
+      
     </div>
   );
 }

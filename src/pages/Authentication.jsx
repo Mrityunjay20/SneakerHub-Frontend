@@ -122,7 +122,9 @@ export default function AuthPage() {
         const signupOutput = await sendData('signup', checker);
         if (signupOutput.status === 201) {
             setTestState(true);
+            console.log(signupOutput);
             localStorage.setItem('token', signupOutput.data.jwt);
+            localStorage.setItem('id', signupOutput.data.id);
             showAlert();
             window.location.href = "/products";
            

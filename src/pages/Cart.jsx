@@ -5,12 +5,12 @@ import api from "../api";
 const Cart = () => {
   const loggedin = localStorage.getItem('token');
 
-
+  const userId = localStorage.getItem('id');
   const [cartItems, setCartItems] = useState([]);
 
   const fetchData = async () => {
     try {
-      const response = await api.get("/cart");
+      const response = await api.get(`/cart/${userId}`);
       setCartItems(response.data);
     } catch (error) {
       console.error("Error fetching cart data:", error);
@@ -29,7 +29,7 @@ const Cart = () => {
       return;
     }
     try {
-      await api.put(`/cart/update/${id}/${quantity}`);
+      await api.put(`/cart/update/${userId}/${id}/${quantity}`);
       // After successful update, fetch data again to get updated cart items
       fetchData();
     } catch (error) {
@@ -39,7 +39,7 @@ const Cart = () => {
 
   const removeItem = async (id) => {
     try {
-      await api.delete(`/cart/remove/${id}`);
+      await api.delete(`/cart/remove/${userId}/${id}`);
       // After successful removal, fetch data again to get updated cart items
       fetchData();
     } catch (error) {
