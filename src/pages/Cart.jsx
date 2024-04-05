@@ -66,7 +66,7 @@ const Cart = () => {
 
   const cartTotal = recalculateCart();
 
-  return (<>
+  return (<div className="min-h-[75%] max-h-max">
   {loggedin != null ?<div className="md:p-5 md:mx-20 sm:mx-0 sm:p-0 text-white">
       <h1 className="text-3xl font-bold mb-4">Shopping Cart</h1>
 
@@ -162,7 +162,7 @@ const Cart = () => {
     <LoginPagePrompt />
     }
   
-  </>
+  </div>
     
   );
 };

@@ -1,28 +1,41 @@
+import { useEffect, useState } from "react";
 import ProductCard from "../ProductCard";
+import api from "../../api";
 
-const PRODUCTS = [
-    { Id: "1", name: "nike", price: "500", shortDecp: "rghrgbgkrtgbrtg" },
-    { Id: "2", name: "adidas", price: "5100", shortDecp: "rghrgbgkrtgbrtg" },
-    { Id: "3", name: "puma", price: "2100", shortDecp: "rghrgbgkrtgbrtg" },
-    { Id: "4", name: "reebok", price: "3200", shortDecp: "rghrgbgkrtgbrtg" },
-    { Id: "5", name: "new balance", price: "2300", shortDecp: "rghrgbgkrtgbrtg" },
-  ];
-
+const PRODUCTS_PER_PAGE = 6;
 export default function FeaturedRow({usergender}){
+
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    api
+      .get("/products")
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, []);
+
+  const indexOfLastProduct = 5 * PRODUCTS_PER_PAGE;
+  const indexOfFirstProduct = indexOfLastProduct - PRODUCTS_PER_PAGE;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
     return (<>
-    <h1 className="text-white">Featured Row</h1>
-    <p className="text-white">{usergender}</p>
-    <div className="flex overflow-x-auto">
-        {PRODUCTS.map((prod) => (
+   <h1 class="text-4xl text-center font-bold py-8 text-white"> Check out our featured products!</h1>
+    <div className="flex flex-wrap justify-center">
+    {currentProducts.map((prod) => (
           <ProductCard
-            key={Math.random()}
-            productid={prod.ID}
+            key={prod.id}
+            productid={prod.id}
+            productImage={prod.imageURL}
             productName={prod.name}
             productPrice={prod.price}
-            shortDescription={prod.shortDecp}
-            className="mr-4" // Optional: Adjust margin between product cards
+            shortDescription={prod.brand}
           />
         ))}
-      </div>
+  </div>
     </>)
 }

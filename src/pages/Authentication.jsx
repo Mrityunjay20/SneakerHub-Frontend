@@ -124,7 +124,7 @@ export default function AuthPage() {
             setTestState(true);
             localStorage.setItem('token', signupOutput.data.jwt);
             showAlert();
-            window.location.href = "/shop";
+            window.location.href = "/products";
            
         } else {
             setTestState(false);
@@ -140,7 +140,7 @@ export default function AuthPage() {
             console.log(signinOutput.data);
             showAlert();
             localStorage.setItem('token',signinOutput.data.jwt)
-            window.location.href = "/shop";
+            window.location.href = "/products";
            
         } else {
             setTestState(false);

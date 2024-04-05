@@ -64,7 +64,7 @@ export function MiniNavBar() {
             fill="#000000"
           />
         </svg>
-        <Link to="/shop" className="flex text-black items-center">
+        <Link to="/products" className="flex text-black items-center">
           Shop
         </Link>
       </Typography>
