@@ -2,6 +2,8 @@ import { Carousel, Typography, Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import CatagoryRow from "../components/ShopRows/CatagoryRow";
 import FeaturedRow from "../components/ShopRows/FeaturedRow";
+import ShoeExport from "../components/three/Threescene";
+// import ShoeScene from "../components/three/Threescene";
 
 
 export default function HomePage() {
@@ -112,7 +114,6 @@ export default function HomePage() {
       </Carousel>
       <FeaturedRow usergender={"male"} />
       <CatagoryRow usergender={"male"} />
-      
-    </div>
+      </div>
   );
 }

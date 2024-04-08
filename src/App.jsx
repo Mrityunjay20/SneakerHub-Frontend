@@ -13,6 +13,7 @@ import NotFoundPage from "./pages/Roots/ProdNotFound404";
 import NoPermissionPage from "./pages/Roots/PermissionDenied403"
 import Cart from "./pages/Cart"
 import OrderPlacedPage from "./pages/OrderPlaced";
+import ShoeExport from "./components/three/Threescene";
 
 
 
@@ -39,6 +40,8 @@ function App() {
         {index:true, element:<AuthPage/>},
       ]
   },
+  { path: "/shoeexport",
+      element: <ShoeExport/>,},
   ]);
 
   return (

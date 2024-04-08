@@ -24,7 +24,7 @@ export default function FeaturedRow({usergender}){
     indexOfLastProduct
   );
     return (<>
-   <h1 class="text-4xl text-center font-bold py-8 text-white"> Check out our featured products!</h1>
+   <h1 className="text-4xl text-center font-bold py-8 text-white"> Check out our featured products!</h1>
     <div className="flex flex-wrap justify-center">
     {currentProducts.map((prod) => (
           <ProductCard

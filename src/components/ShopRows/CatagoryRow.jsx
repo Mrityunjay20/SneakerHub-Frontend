@@ -26,7 +26,7 @@ export default function CatagoryRow({ usergender }) {
 
   return (
     <>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center font-bold py-8 text-white">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center font-bold py-8 text-white">
         Check out our latest products!
       </h1>
       <div className="flex flex-wrap justify-center">
