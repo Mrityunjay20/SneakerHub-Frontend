@@ -1,5 +1,6 @@
 import { Carousel, Typography, Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { SimpleCard } from "../components/3dcard";
 import CatagoryRow from "../components/ShopRows/CatagoryRow";
 import FeaturedRow from "../components/ShopRows/FeaturedRow";
 import ShoeExport from "../components/three/Threescene";
@@ -114,6 +115,14 @@ export default function HomePage() {
       </Carousel>
       <FeaturedRow usergender={"male"} />
       <CatagoryRow usergender={"male"} />
+
+        <SimpleCard className="w-full mx-auto" />
+
+      <ShoeExport className="w-1/4 bg-gray-400" />
+      
+  
+
+      
       </div>
   );
 }

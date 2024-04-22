@@ -14,6 +14,7 @@ import NoPermissionPage from "./pages/Roots/PermissionDenied403"
 import Cart from "./pages/Cart"
 import OrderPlacedPage from "./pages/OrderPlaced";
 import ShoeExport from "./components/three/Threescene";
+import SingleShoeDetail from "./pages/SingleShoe";
 
 
 
@@ -31,6 +32,7 @@ function App() {
         // { path: "/products/:productId", element: <ProductDetailPage /> },
         { path: "/cart", element: <Cart/> },
         { path: "/orderplaced", element: <OrderPlacedPage/>},
+        { path: "/shoeexport", element: <SingleShoeDetail/>},
       ],
     },
     { path: "/login",
@@ -40,8 +42,8 @@ function App() {
         {index:true, element:<AuthPage/>},
       ]
   },
-  { path: "/shoeexport",
-      element: <ShoeExport/>,},
+  // { path: "/shoeexport",
+  //     element: <ShoeExport/>,},
   ]);
 
   return (

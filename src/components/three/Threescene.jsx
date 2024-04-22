@@ -1,60 +1,49 @@
-import { Button } from '@material-tailwind/react';
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import SceneInit from './lib/SceneInit';
+import React, { useRef } from 'react';
+import { Canvas, useLoader, useFrame } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from '@react-three/drei';
+import { Camera } from 'three';
 
 function ShoeExport() {
-  const loadedModelRef = useRef(null);
-  const animationFrameIdRef = useRef(null);
+  const modelRef = useRef();
 
-  useEffect(() => {
-    const test = new SceneInit('myThreeJsCanvas');
-    test.initialize();
-    test.animate();
-
-    const gltfLoader = new GLTFLoader();
-    gltfLoader.load('src/assets/Jordanfinal.gltf', (gltfScene) => {
-      loadedModelRef.current = gltfScene;
-      gltfScene.scene.rotation.y = 0;
-      gltfScene.scene.position.y = 0;
-      gltfScene.scene.scale.set(1, 1, 1);
-      test.scene.add(gltfScene.scene);
-    });
-
-    return () => {
-      // Cleanup animation loop
-      if (animationFrameIdRef.current) {
-        cancelAnimationFrame(animationFrameIdRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const animate = () => {
-      if (loadedModelRef.current) {
-        loadedModelRef.current.scene.rotation.x += 0.00;
-        loadedModelRef.current.scene.rotation.y += 0.01;
-        loadedModelRef.current.scene.rotation.z -= 0.00;
-      }
-      animationFrameIdRef.current = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      // Cleanup animation loop
-      if (animationFrameIdRef.current) {
-        cancelAnimationFrame(animationFrameIdRef.current);
-      }
-    };
-  }, []);
+  // Load GLTF model using useLoader hook
+  const gltf = useLoader(GLTFLoader, 'src/assets/Jordanfinal.gltf');
+  gltf.scene.scale.set(0.21, 0.21, 0.21);
 
   return (
-    <div className='w-1/2'>
-      <canvas className='w-1/2' id="myThreeJsCanvas" />
+    <div style={{ width: '50%', border: '2px solid #ff', margin:'10px auto -100px auto' , height: '70vh' }}>
+      {/* Set desired dimensions for the Canvas */}
+      <Canvas style={{ width: '100%', height: '80%' }}>
+        {/* Add lights and camera */}
+        <ambientLight />
+        <directionalLight position={[10, 10, 10]} />
+        <perspectiveCamera position={[0, 0, 200]} fov={75} />
+
+        {/* Render the loaded model */}
+        <primitive object={gltf.scene} ref={modelRef} />
+
+
+        {/* Animate the model */}
+        <ModelAnimation modelRef={modelRef} />
+
+        {/* Add OrbitControls for mouse interaction */}
+        <OrbitControls enableZoom={false} />
+      </Canvas>
     </div>
   );
+}
+
+// Component to animate the model
+function ModelAnimation({ modelRef }) {
+  useFrame(() => {
+    // Rotate the model
+    modelRef.current.rotation.y += 0.01;
+
+  
+  });
+
+  return (null);
 }
 
 export default ShoeExport;
